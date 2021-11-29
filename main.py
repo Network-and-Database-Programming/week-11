@@ -46,7 +46,7 @@ def SetSearchResultWindow(PathList) :
     ###
     count = 0
     for path in PathList :
-        newBtn = tk.Button(SearchResult, text = path, bg = "antique white", width = '25', height = '1', font = EntryFont)
+        newBtn = tk.Button(SearchResult, text = path,anchor = 'w', bg = "antique white", width = '25', height = '1', font = EntryFont)
         newBtn.config(command = lambda path = path :OpenExploer(path))
         GetPosOfSearch(count, newBtn)
         count += 1
@@ -92,7 +92,7 @@ Add_Tag_Btn2 = tk.Button(window, text ="Add Tag", bg = "light blue", width = '10
 Search_Btn = tk.Button(window, text ="Search", bg = "light blue", width = '10', height = '1', font = BtnFont)
 ##
 Login_Btn = tk.Button(window, text ="Login", bg = "light blue", width = '10', height = '1', font = BtnFont)
-Login_Btn.place(x = 550, y = 105)
+Login_Btn.place(x = 550, y = 305)
 ### input entry
 Type_Input = tk.Entry(window, font = BtnFont, width = '11')
 Tag_Input = tk.Entry(window, font = BtnFont, width = '11')
@@ -104,9 +104,9 @@ Search_Input = tk.Entry(window, font = EntryFont, width = '34')
 #
 User_Input = tk.Entry(window, font = EntryFont, width = '20')
 User_Input.insert(0, 'input username')
-User_Input.place(x = 550, y = 50)
+User_Input.place(x = 550, y = 250)
 PSW_Input = tk.Entry(window, font = EntryFont, width = '20', show="*")
-PSW_Input.place(x = 550, y = 80)
+PSW_Input.place(x = 550, y = 280)
 ### dropdown
 variable = tk.StringVar(window)
 type_of_tag = tk.OptionMenu(window, variable, "")

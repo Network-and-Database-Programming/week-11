@@ -2,7 +2,8 @@ import tkinter as tk
 import os
 from tkinter import filedialog
 import MySQLdb
-from urllib.parse import urlparse
+from urllib.request import urlopen
+from mechanize import Browser
 ###
 UserName = ""
 Pswd = ""
@@ -76,8 +77,9 @@ def InsertPath(path):
     con = MySQLdb.connect(host="localhost", user = UserName, password = Pswd, db="filedata")
     with con:
         cur=con.cursor()
-        domain = urlparse(path).netloc
-        cur.execute(f"Insert into url Values(null, '{path}', '{domain}')")
+        br = Browser()
+        br.open(path)
+        cur.execute(f"Insert into url Values(null, '{path}', '{br.title()}')")
         con.commit()
         cur.execute(f"SELECT url_id from url WHERE Urldata = '{path}'")
         return cur.fetchone()[0]
@@ -158,7 +160,7 @@ def GetNameByTagid(TagID, StatusText):
 def GetPathByFileid(fileID, StatusText):
     con = MySQLdb.connect(host="localhost", user = UserName, password = Pswd, db="filedata")
     cur=con.cursor()
-    cur.execute (f"SELECT Urldata from url WHERE url_id = '{fileID}'")
+    cur.execute (f"SELECT name from url WHERE url_id = '{fileID}'")
     tmp = cur.fetchone()
     if tmp :
         return tmp[0]
